@@ -26,6 +26,9 @@ Below we describe the dataset including names / values of important variables, t
 summary(penguins)
 ```
 
+
+The variable names of the penguins dataset are `r names(penguins)`.
+
 #### the Size of the Dataset 
 
 ```{r}
