@@ -1,21 +1,63 @@
 ---
-title: "Simple document"
-output: html_document
+title: "HW1 document"
+output: github_document
 ---
 
-I'm an R Markdown document! 
-
-# Section 1
-
-Here's a **code chunk** that samples from 
-a _normal distribution_:
+## Problem 1
 
 ```{r}
-samp = rnorm(100)
-length(samp)
+library(tidyverse)
 ```
 
-# Section 2
+Let's load the 'penguins' dataset 
 
-I can take the mean of the sample, too!
-The mean is `r mean(samp)`.
+```{r}
+data("penguins", package = "palmerpenguins")
+```
+
+Write a short description of the 'penguins' dataset
+
+#### the data in this dataset 
+```{r}
+# It includes names / values of important variables
+summary(penguins)
+```
+
+#### the size of the dataset 
+
+```{r}
+#the number of rows in 'penguins'
+nrow(penguins)
+#the number of columns in 'penguins'
+ncol(penguins)
+```
+
+#### the mean flipper length
+```{r}
+
+mean(penguins$flipper_length_mm)
+
+```
+
+
+#### Make a scatterplot
+```{r}
+penguins %>%
+ggplot(aes(bill_length_mm, flipper_length_mm, color = species)) +
+    geom_point()
+
+```
+
+## Problem 2
+
+```{r}
+example_df = 
+  tibble(
+    var_numeric = rnorm(10),
+    var_logical = ,
+    var_char = c("A","B","C","D","E","F","G","H","I","J"),
+    var_factor = factor(c("Red","Red","Blue", "Red","Blue","Red","Blue", "Black","Black","Black"))
+  )
+```
+
+
