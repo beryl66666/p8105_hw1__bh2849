@@ -1,13 +1,15 @@
 ---
 title: "HW1 document"
 output: github_document
+name: Binyue Hu
+UNI: bh2849
 ---
 
-## Problem 1
-
-```{r}
+```{r setup}
 library(tidyverse)
 ```
+
+## Problem 1
 
 Let's load the 'penguins' dataset 
 
@@ -15,15 +17,16 @@ Let's load the 'penguins' dataset
 data("penguins", package = "palmerpenguins")
 ```
 
-Write a short description of the 'penguins' dataset
+#### a Short Description of the 'Penguins' dataset
 
-#### the data in this dataset 
+Below we describe the dataset including names / values of important variables, the size of the dataset, and the mean flipper length.
+
 ```{r}
 # It includes names / values of important variables
 summary(penguins)
 ```
 
-#### the size of the dataset 
+#### the Size of the Dataset 
 
 ```{r}
 #the number of rows in 'penguins'
@@ -32,32 +35,58 @@ nrow(penguins)
 ncol(penguins)
 ```
 
-#### the mean flipper length
+#### the Mean Flipper Length
 ```{r}
-
-mean(penguins$flipper_length_mm)
-
+mean(pull(penguins,flipper_length_mm),na.rm = TRUE)
 ```
 
+Let's make a scatterplot
 
-#### Make a scatterplot
+#### Make a Scatterplot
 ```{r}
+
 penguins %>%
 ggplot(aes(bill_length_mm, flipper_length_mm, color = species)) +
     geom_point()
+
+ggsave("scatter_plot.pdf",height = 4, width = 6)
 
 ```
 
 ## Problem 2
 
+#### Dataframe 
 ```{r}
-example_df = 
+problem2_df = 
   tibble(
-    var_numeric = rnorm(10),
-    var_logical = ,
+    random_samp = rnorm(10),
+    var_logical = random_samp > 0,
     var_char = c("A","B","C","D","E","F","G","H","I","J"),
     var_factor = factor(c("Red","Red","Blue", "Red","Blue","Red","Blue", "Black","Black","Black"))
   )
+
+show(problem2_df)
 ```
 
+#### Mean of Each Variable of Dateframe
+```{r}
+mean(pull(problem2_df, random_samp))
+mean(pull(problem2_df, var_logical))
+mean(pull(problem2_df, var_char))
+mean(pull(problem2_df, var_factor))
+```
+#### Convert Variables to Numeric Factors 
+Logical vector can be convert to numeric vector because it has two options and they are able to calculate the mean. 
+
+Character vector is not able to be calculated for the mean or convert to numeric vector.
+
+Factor vector can be assigned different numbers for the different levels, and it can be calculated for the mean.
+```{r}
+convert_logical = as.numeric(pull(problem2_df, var_logical))
+
+convert_char = as.numeric(pull(problem2_df, var_logical))
+
+convert_factor = as.numeric(pull(problem2_df, var_factor))
+
+```
 
